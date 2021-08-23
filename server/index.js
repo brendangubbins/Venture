@@ -54,13 +54,13 @@ passport.use(new GoogleStrategy({
       if (currentUser) {
         done(null, currentUser);
       } else {
-        // console.log(profile);
+        console.log(profile);
         new User({
           googleID: profile.id,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          email: profile.email,
-          avatar: profile.picture,
+          email: profile.emails[0].value,
+          avatar: profile.photos[0].value,
         }).save().then((newUser) => {
           done(null, newUser);
         }).catch((err) => console.log(err));
@@ -78,6 +78,10 @@ app.get('/auth/google/callback',
   (request, response) => {
     response.redirect('http://localhost:3000'); // redirect after login
   });
+
+app.get('/getUser', (request, response) => {
+  response.send(request.user);
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
