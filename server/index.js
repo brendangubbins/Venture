@@ -9,6 +9,8 @@ const User = require('./models/User');
 require('dotenv').config();
 
 const app = express();
+const cors = require('cors');
+const axios = require('axios');
 
 const PORT = process.env.PORT || 5000;
 
@@ -82,6 +84,30 @@ app.get('/auth/google/callback',
 app.get('/getUser', (request, response) => {
   response.send(request.user);
 });
+
+app.post('/api/search', (request, response) => {
+  console.log("the parameters are:", request.body);
+
+  var config = {
+    method: 'get',
+    url: `https://api.yelp.com/v3/events?latitude=${request.body.latitude}&longitude=${request.body.longitude}&categories=${request.body.type}&start_date=${request.body.startDate}&limit=${request.body.limit}&radius=${request.body.radius}`,
+    headers: {
+      'Authorization': `Bearer ${env.YELP_KEY}` 
+     }
+  };
+  
+  axios(config)
+  .then(function (responseFromYelpAPI) {
+    console.log(JSON.stringify(responseFromYelpAPI.data));
+    return response.send(responseFromYelpAPI.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

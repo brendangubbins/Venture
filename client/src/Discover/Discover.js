@@ -50,6 +50,58 @@ const Heading = styled.h1`
   margin-top: 3rem;
 `;
 
+const unixStartDate = Math.round((new Date()).getTime() / 1000);
+
+const getLocation = () => {
+  return new Promise(
+    (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
+  );
+}
+
+
+const categoryToResults = async (category) => {
+
+  if(!navigator.geolocation){
+    console.log('error; Geolocation API failed.');
+  }
+
+  const position = await getLocation();
+ 
+  const yelpAPIResults = await axios({
+    method: 'post',
+    url: 'http://localhost:5000/api/search',
+    data: {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      type: category,
+      startDate: unixStartDate,
+      limit: 20,  
+      radius: 40000
+    }
+  });
+
+  console.log("yelp api stuff: ", yelpAPIResults); //use the yelpapiresults and store in state
+  
+
+}
+
+
+const [event, setEvent] = useState('');
+
+  const handleEventClick = (e) => {
+    
+    const type = e.target.alt;
+
+    categoryToResults(type);
+
+    setEvent(type);
+
+  }
+
+
+
+
+
 function Discover() {
   const firstRowEvents = DiscoverEvents.slice(0, 3);
   const secondRowEvents = DiscoverEvents.slice(3, 6);
