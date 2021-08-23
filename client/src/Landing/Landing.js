@@ -71,6 +71,10 @@ const ImageContainer = styled.img`
 
 //renders the landing page
 const Landing = () => {
+  const handleGoogleLogin = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+
   return (
     <Wrapper>
       <LeftAlign>
@@ -78,7 +82,7 @@ const Landing = () => {
           <Header>Enter Slogan Here</Header>
           <Description>Enter Description Here</Description>
           <ButtonWrap>
-            <LoginButton>Login</LoginButton>
+            <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>
           </ButtonWrap>
         </TextWrapper>
       </LeftAlign>
