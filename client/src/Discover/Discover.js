@@ -75,28 +75,25 @@ const categoryToResults = async (category) => {
       longitude: position.coords.longitude,
       type: category,
       startDate: unixStartDate,
-      limit: 20,
+      limit: 6,
       radius: 40000,
     },
   });
-
-  console.log("yelp api stuff: ", yelpAPIResults); //use the yelpapiresults and store in state
+  // console.log("These are my results from the function", yelpAPIResults);
+  //use the yelp api results and store in state
+  return yelpAPIResults.data;
 };
 
 function Discover() {
   const firstRowEvents = DiscoverEvents.slice(0, 3);
   const secondRowEvents = DiscoverEvents.slice(3, 6);
-  const [event, setEvent] = useState("");
+  const [eventResults, setEventResults] = useState([]);
 
-  const handleEventClick = (e) => {
-    const type = e.target.alt;
-    categoryToResults(type);
-    setEvent(type);
+  const handleEventClick = async (e, data) => {
+    let res = await categoryToResults(data);
+    console.log(res);
+    setEventResults(res);
   };
-
-  // const handleEventClick = (e, data) => {
-  //   console.log(data);
-  // };
 
   return (
     <>
@@ -122,7 +119,10 @@ function Discover() {
               return (
                 <Category key={key}>
                   <CategoryName>{data.name}</CategoryName>
-                  <CategoryImage src={data.image} />
+                  <CategoryImage
+                    src={data.image}
+                    onClick={(e) => handleEventClick(e, data.type)}
+                  />
                 </Category>
               );
             })}
