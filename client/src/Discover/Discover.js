@@ -1,7 +1,9 @@
 import React from 'react';
+import { useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import styled from 'styled-components';
 import { DiscoverEvents } from './DiscoverEvents';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
