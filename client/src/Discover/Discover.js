@@ -1,9 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import styled from 'styled-components';
-import { DiscoverEvents } from './DiscoverEvents';
-import axios from 'axios';
+import React from "react";
+import { useState } from "react";
+import Sidebar from "../Sidebar/Sidebar";
+import styled from "styled-components";
+import { DiscoverEvents } from "./DiscoverEvents";
+import axios from "axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const Category = styled.div`
 
 const CategoryName = styled.h3`
   color: white;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
 `;
 
 const CategoryImage = styled.img`
@@ -48,69 +48,55 @@ const CategoryImage = styled.img`
 
 const Heading = styled.h1`
   color: white;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   margin-top: 3rem;
 `;
 
-const unixStartDate = Math.round((new Date()).getTime() / 1000);
+const unixStartDate = Math.round(new Date().getTime() / 1000);
 
 const getLocation = () => {
-  return new Promise(
-    (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
+  return new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject)
   );
-}
-
+};
 
 const categoryToResults = async (category) => {
-
-  if(!navigator.geolocation){
-    console.log('error; Geolocation API failed.');
+  if (!navigator.geolocation) {
+    console.log("error; Geolocation API failed.");
   }
 
   const position = await getLocation();
- 
+
   const yelpAPIResults = await axios({
-    method: 'post',
-    url: 'http://localhost:5000/api/search',
+    method: "post",
+    url: "http://localhost:5000/api/search",
     data: {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
       type: category,
       startDate: unixStartDate,
-      limit: 20,  
-      radius: 40000
-    }
+      limit: 20,
+      radius: 40000,
+    },
   });
 
   console.log("yelp api stuff: ", yelpAPIResults); //use the yelpapiresults and store in state
-  
-
-}
-
-
-const [event, setEvent] = useState('');
-
-  const handleEventClick = (e) => {
-    
-    const type = e.target.alt;
-
-    categoryToResults(type);
-
-    setEvent(type);
-
-  }
-
-
-
-
+};
 
 function Discover() {
   const firstRowEvents = DiscoverEvents.slice(0, 3);
   const secondRowEvents = DiscoverEvents.slice(3, 6);
+  const [event, setEvent] = useState("");
 
-  const handleEventClick = (e, data) => {
-    console.log(data);
+  const handleEventClick = (e) => {
+    const type = e.target.alt;
+    categoryToResults(type);
+    setEvent(type);
   };
+
+  // const handleEventClick = (e, data) => {
+  //   console.log(data);
+  // };
 
   return (
     <>
