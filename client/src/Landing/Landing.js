@@ -9,7 +9,8 @@ const Wrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
+  background-color: #0a192f;
 `;
 
 const LeftAlign = styled.div`
