@@ -1,6 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import Adventure from "../Images/Adventure.png";
+import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components';
+import Adventure from '../Images/Adventure.png';
+import axios from 'axios';
+import Context from '../Context';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,7 +29,7 @@ const TextWrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -35,7 +38,7 @@ const Header = styled.h1`
 `;
 
 const Description = styled.h3`
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   color: white;
   text-align: center;
   font-size: 2rem;
@@ -46,7 +49,7 @@ const ButtonWrap = styled.div`
 `;
 
 const LoginButton = styled.button`
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   background-color: #00cba6;
   border-radius: 20px;
   color: white;
@@ -71,8 +74,27 @@ const ImageContainer = styled.img`
 
 //renders the landing page
 const Landing = () => {
+  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
+    useContext(Context);
+
+  useEffect(() => {
+    console.log('Landing userObject', userObject);
+  }, [userObject]);
+
   const handleGoogleLogin = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    axios
+      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .then((response) => {
+        if (response.data) {
+          setUserObject(response.data);
+          //window.open('http://localhost:3000/Dashboard');
+        } else {
+          window.open('http://localhost:5000/auth/google', '_self');
+        }
+      })
+      .catch((error) => {
+        console.log('error logging in', error);
+      });
   };
 
   return (
@@ -82,7 +104,9 @@ const Landing = () => {
           <Header>Enter Slogan Here</Header>
           <Description>Enter Description Here</Description>
           <ButtonWrap>
-            <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>
+            <Link to="/Dashboard" onClick={handleGoogleLogin}>
+              <LoginButton>Login</LoginButton>
+            </Link>
           </ButtonWrap>
         </TextWrapper>
       </LeftAlign>
