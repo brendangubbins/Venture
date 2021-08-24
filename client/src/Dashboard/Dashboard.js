@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Trending from './Trending';
 import Feed from './Feed';
 import Sidebar from '../Sidebar/Sidebar';
+import Context from '../Context';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,6 +48,19 @@ const Social = styled.div`
 `;
 
 const Dashboard = () => {
+  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
+    useContext(Context);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .then((response) => {
+        setUserObject(response.data);
+        console.log('userObject retrieved in Dashboard', userObject)
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <Wrapper>
       <Sidebar />

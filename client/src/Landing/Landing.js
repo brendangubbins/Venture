@@ -58,6 +58,7 @@ const LoginButton = styled.button`
   width: 175px;
   padding: 1rem;
   border: 2px solid #00cba6;
+  cursor: pointer;
 `;
 
 const RightAlign = styled.div`
@@ -78,8 +79,8 @@ const Landing = () => {
     useContext(Context);
 
   useEffect(() => {
-    console.log('Landing userObject', userObject);
-  }, [userObject]);
+    console.log('userObject retrieved in Landing', userObject);
+  }, []);
 
   const handleGoogleLogin = () => {
     axios
@@ -87,7 +88,7 @@ const Landing = () => {
       .then((response) => {
         if (response.data) {
           setUserObject(response.data);
-          //window.open('http://localhost:3000/Dashboard');
+          window.open('http://localhost:3000/Dashboard', '_self');
         } else {
           window.open('http://localhost:5000/auth/google', '_self');
         }
@@ -104,9 +105,9 @@ const Landing = () => {
           <Header>Enter Slogan Here</Header>
           <Description>Enter Description Here</Description>
           <ButtonWrap>
-            <Link to="/Dashboard" onClick={handleGoogleLogin}>
-              <LoginButton>Login</LoginButton>
-            </Link>
+            {/* <Link to="/Dashboard" onClick={handleGoogleLogin}> */}
+            <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>
+            {/* </Link> */}
           </ButtonWrap>
         </TextWrapper>
       </LeftAlign>

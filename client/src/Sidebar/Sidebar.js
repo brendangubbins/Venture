@@ -114,11 +114,28 @@ const MenuListItem = styled.li`
 const Sidebar = () => {
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
-  console.log('userObj', userObject);
 
   useEffect(() => {
-    console.log('Sidebar userObject', userObject);
+    axios
+      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .then((response) => {
+        setUserObject(response.data);
+        console.log('userObject retrieved in Sidebar', userObject)
+      })
+      .catch((error) => console.log(error));
   }, []);
+
+  const handleLogout = () => {
+    axios
+      .get('http://localhost:5000/auth/logout', { withCredentials: true })
+      .then((response) => {
+        console.log(response);
+        window.open('http://localhost:3000', '_self');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
 
   return (
     <Wrapper>
@@ -148,21 +165,16 @@ const Sidebar = () => {
             <MenuListItem
               key={key}
               active={window.location.pathname === data.path}
-              onClick={() => {
-                window.location.pathname = data.path;
-              }}
+            // onClick={() => {
+            //   window.location.pathname = data.path;
+            // }}
             >
               <div style={{ marginRight: '1rem' }}>{data.icon}</div>
               <Link
                 onClick={() => {
                   if (data.title === 'Logout') {
                     setUserObject(null);
-                    axios
-                      .get('http://localhost:5000/auth/logout')
-                      .then((response) => {
-                        console.log('logged out');
-                      })
-                      .catch((err) => console.log('err logging out', err));
+                    handleLogout();
                   }
                 }}
                 to={data.path === 'Logout' ? '/' : data.path}
