@@ -1,10 +1,11 @@
-import React from 'react';
-import { useState, useContext } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import styled from 'styled-components';
-import { DiscoverEvents } from './DiscoverEvents';
-import axios from 'axios';
-import Context from '../Context';
+import React from "react";
+import { useState, useContext } from "react";
+import Sidebar from "../Sidebar/Sidebar";
+import styled from "styled-components";
+import { DiscoverEvents } from "./DiscoverEvents";
+import axios from "axios";
+import Context from "../Context";
+import Results from "../Results/Results";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const Category = styled.div`
 
 const CategoryName = styled.h3`
   color: white;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
 `;
 
 const CategoryImage = styled.img`
@@ -49,7 +50,7 @@ const CategoryImage = styled.img`
 
 const Heading = styled.h1`
   color: white;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   margin-top: 3rem;
 `;
 
@@ -63,14 +64,14 @@ const getLocation = () => {
 
 const categoryToResults = async (category) => {
   if (!navigator.geolocation) {
-    console.log('error; Geolocation API failed.');
+    console.log("error; Geolocation API failed.");
   }
 
   const position = await getLocation();
 
   const yelpAPIResults = await axios({
-    method: 'post',
-    url: 'http://localhost:5000/api/search',
+    method: "post",
+    url: "http://localhost:5000/api/search",
     data: {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
@@ -92,51 +93,54 @@ function Discover() {
 
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
-  console.log('userObject', userObject);
-  console.log('yelpEvents', yelpEvents);
+  console.log("userObject", userObject);
+  console.log("yelpEvents", yelpEvents);
 
   const handleEventClick = async (e, data) => {
     let res = await categoryToResults(data);
     console.log(res);
-    setYelpEvents(res);
+    setYelpEvents(res.events);
   };
-
-  return (
-    <>
-      <Wrapper>
-        <Sidebar />
-        <CategoriesContainer>
-          <Heading>Pick Your Category</Heading>
-          <CategoriesRow>
-            {firstRowEvents.map((data, key) => {
-              return (
-                <Category key={key}>
-                  <CategoryName>{data.name}</CategoryName>
-                  <CategoryImage
-                    onClick={(e) => handleEventClick(e, data.type)}
-                    src={data.image}
-                  />
-                </Category>
-              );
-            })}
-          </CategoriesRow>
-          <CategoriesRow>
-            {secondRowEvents.map((data, key) => {
-              return (
-                <Category key={key}>
-                  <CategoryName>{data.name}</CategoryName>
-                  <CategoryImage
-                    src={data.image}
-                    onClick={(e) => handleEventClick(e, data.type)}
-                  />
-                </Category>
-              );
-            })}
-          </CategoriesRow>
-        </CategoriesContainer>
-      </Wrapper>
-    </>
-  );
+  if (yelpEvents.length === 0) {
+    return (
+      <>
+        <Wrapper>
+          <Sidebar />
+          <CategoriesContainer>
+            <Heading>Pick Your Category</Heading>
+            <CategoriesRow>
+              {firstRowEvents.map((data, key) => {
+                return (
+                  <Category key={key}>
+                    <CategoryName>{data.name}</CategoryName>
+                    <CategoryImage
+                      onClick={(e) => handleEventClick(e, data.type)}
+                      src={data.image}
+                    />
+                  </Category>
+                );
+              })}
+            </CategoriesRow>
+            <CategoriesRow>
+              {secondRowEvents.map((data, key) => {
+                return (
+                  <Category key={key}>
+                    <CategoryName>{data.name}</CategoryName>
+                    <CategoryImage
+                      src={data.image}
+                      onClick={(e) => handleEventClick(e, data.type)}
+                    />
+                  </Category>
+                );
+              })}
+            </CategoriesRow>
+          </CategoriesContainer>
+        </Wrapper>
+      </>
+    );
+  } else {
+    return <Results yelpEvents={yelpEvents} />;
+  }
 }
 
 export default Discover;

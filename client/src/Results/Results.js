@@ -1,14 +1,15 @@
-import React from "react";
 import styled from "styled-components";
 import event from "../Images/event.jpg";
 import ResultCard from "./ResultCard";
 import Sidebar from "../Sidebar/Sidebar";
+import { SimpleGrid, Flex } from "@chakra-ui/layout";
 
 const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  margin-top: 2rem;
 `;
 
 const Title = styled.header`
@@ -16,7 +17,6 @@ const Title = styled.header`
   color: white;
   font-size: 3rem;
   text-align: center;
-  margin-top: 15rem;
 `;
 
 const Grid = styled.div`
@@ -38,7 +38,8 @@ const ContentWrapper = styled.div`
   width: 100%;
 `;
 
-const Results = () => {
+const Results = ({ yelpEvents }) => {
+  console.log("These are my yelp events in results", yelpEvents);
   //dummy data to populate cards
   let data = [
     {
@@ -90,36 +91,41 @@ const Results = () => {
       link: "Example.com",
     },
   ];
+  // const { yelpEvents } = useContext(Context);
 
-  let split1 = [];
-  split1.push(data.shift());
-  split1.push(data.shift());
-  split1.push(data.shift());
-  let split2 = [];
-  split2.push(data.shift());
-  split2.push(data.shift());
-  split2.push(data.shift());
+  // let split1 = [];
+  // split1.push(data.shift());
+  // split1.push(data.shift());
+  // split1.push(data.shift());
+  // let split2 = [];
+  // split2.push(data.shift());
+  // split2.push(data.shift());
+  // split2.push(data.shift());
 
   //making mock cards, waiting for api to be finished
   return (
-    <Wrapper>
+    // <Wrapper>
+    <Flex justifyContent="center">
       <Sidebar />
       <ContentWrapper>
-        <Title>Your Results</Title>
-        <Grid>
-          <Container>
-            {split1.map((data, index) => {
-              return <ResultCard cardData={data} key={index} />;
-            })}
-          </Container>
-          <Container>
+        <Title>Pick your next adventure</Title>
+        {/* <Grid>
+          <Container> */}
+        <SimpleGrid columns="3" spacing={10}>
+          {yelpEvents.map((data, index) => {
+            return <ResultCard event={data} key={index} />;
+          })}
+        </SimpleGrid>
+        {/* </Container> */}
+        {/* <Container>
             {split2.map((data, index) => {
               return <ResultCard cardData={data} key={index} />;
             })}
-          </Container>
-        </Grid>
+          </Container> */}
+        {/* </Grid> */}
       </ContentWrapper>
-    </Wrapper>
+    </Flex>
+    // </Wrapper>
   );
 };
 
