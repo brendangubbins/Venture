@@ -102,6 +102,7 @@ app.get('/auth/logout', (request, response) => {
     console.log(request.user);
     //response.redirect('http://localhost:3000');
   }
+  response.sendStatus(200);
 });
 
 app.post('/api/search', (request, response) => {
