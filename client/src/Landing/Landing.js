@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import styled from 'styled-components';
-import Adventure from '../Images/Adventure.png';
-import axios from 'axios';
-import Context from '../Context';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from "react";
+import styled from "styled-components";
+import Adventure from "../Images/Adventure.png";
+import axios from "axios";
+import Context from "../Context";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const TextWrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -38,7 +38,7 @@ const Header = styled.h1`
 `;
 
 const Description = styled.h3`
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   color: white;
   text-align: center;
   font-size: 2rem;
@@ -49,7 +49,7 @@ const ButtonWrap = styled.div`
 `;
 
 const LoginButton = styled.button`
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   background-color: #00cba6;
   border-radius: 20px;
   color: white;
@@ -58,7 +58,12 @@ const LoginButton = styled.button`
   width: 175px;
   padding: 1rem;
   border: 2px solid #00cba6;
-  cursor: pointer;
+  transition: 0.5s all ease-out;
+  &:hover {
+    transform: translateY(-0.5rem);
+    filter: drop-shadow(0 0 0.75rem #346e93);
+    cursor: pointer;
+  }
 `;
 
 const RightAlign = styled.div`
@@ -79,22 +84,22 @@ const Landing = () => {
     useContext(Context);
 
   useEffect(() => {
-    console.log('userObject retrieved in Landing', userObject);
+    console.log("userObject retrieved in Landing", userObject);
   }, []);
 
   const handleGoogleLogin = () => {
     axios
-      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .get("http://localhost:5000/getUser", { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setUserObject(response.data);
-          window.open('http://localhost:3000/Dashboard', '_self');
+          window.open("http://localhost:3000/Dashboard", "_self");
         } else {
-          window.open('http://localhost:5000/auth/google', '_self');
+          window.open("http://localhost:5000/auth/google", "_self");
         }
       })
       .catch((error) => {
-        console.log('error logging in', error);
+        console.log("error logging in", error);
       });
   };
 
