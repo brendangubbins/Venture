@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Nav = styled.div`
   display: flex;
@@ -10,10 +10,11 @@ const Nav = styled.div`
   width: 100%;
   height: 100px;
   border-bottom: 1px solid #040a13;
+  position: fixed;
 `;
 
 const Logo = styled.h3`
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 3rem;
   color: white;
   margin-left: 1.5rem;
@@ -34,7 +35,7 @@ const AboutButton = styled.button`
   border-radius: 10px;
   color: white;
   margin-top: 0.5rem;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   width: 8rem;
@@ -53,14 +54,14 @@ const Navbar = () => {
   return (
     <Nav>
       <Logo>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           CTP Hack
         </Link>
       </Logo>
       <ButtonWrap>
         <AboutButton
           to="/About"
-          style={{ textDecoration: "none", color: "white" }}
+          style={{ textDecoration: 'none', color: 'white' }}
         >
           About
         </AboutButton>
