@@ -55,6 +55,12 @@ const LoginButton = styled.button`
   width: 175px;
   padding: 1rem;
   border: 2px solid #00cba6;
+  transition: 0.5s all ease-out;
+  &:hover {
+    transform: translateY(-0.5rem);
+    filter: drop-shadow(0 0 0.75rem #346e93);
+    cursor: pointer;
+  }
 `;
 
 const RightAlign = styled.div`
