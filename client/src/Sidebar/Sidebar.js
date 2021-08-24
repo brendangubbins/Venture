@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { SidebarData } from './SidebarData';
 import { Link } from 'react-router-dom';
+import CTP from '../Images/CTP.png';
+import Context from '../Context';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   background: #071221;
@@ -15,6 +18,7 @@ const UserInformtion = styled.div`
   align-items: center;
   background: #071221;
   border-bottom: #00cba6 1px solid;
+  padding: 0.5rem 0;
 `;
 const UserImage = styled.img`
   border-radius: 100px;
@@ -108,18 +112,31 @@ const MenuListItem = styled.li`
 `;
 
 const Sidebar = () => {
+  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
+    useContext(Context);
+  console.log('userObj', userObject);
+
+  useEffect(() => {
+    console.log('Sidebar userObject', userObject);
+  }, []);
+
   return (
     <Wrapper>
       <UserInformtion>
-        <UserImage src="#" />
+        {userObject ? <UserImage src={userObject.avatar} /> : null}
+
         <NameBioContainer>
-          <Username>First Last</Username>
-          <UserBio>Short bio statement</UserBio>
+          {userObject ? (
+            <Username>
+              {userObject.firstName} {userObject.lastName}
+            </Username>
+          ) : null}
+          {/* <UserBio>Short bio statement</UserBio> */}
         </NameBioContainer>
       </UserInformtion>
       <EventInfoHeader>Upcoming Event</EventInfoHeader>
       <EventInformation>
-        <EventImage src="/" />
+        <EventImage src={CTP} />
         <NameLocationContainer>
           <EventName>C7 Welcome Hackathon</EventName>
         </NameLocationContainer>
@@ -137,7 +154,18 @@ const Sidebar = () => {
             >
               <div style={{ marginRight: '1rem' }}>{data.icon}</div>
               <Link
-                to={data.path}
+                onClick={() => {
+                  if (data.title === 'Logout') {
+                    setUserObject(null);
+                    axios
+                      .get('http://localhost:5000/auth/logout')
+                      .then((response) => {
+                        console.log('logged out');
+                      })
+                      .catch((err) => console.log('err logging out', err));
+                  }
+                }}
+                to={data.path === 'Logout' ? '/' : data.path}
                 style={{ textDecoration: 'None', color: 'inherit' }}
               >
                 {data.title}
