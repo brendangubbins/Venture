@@ -19,6 +19,9 @@ const CategoriesContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 83%;
+  margin-left: 307px;
+  margin-top: 101px;
+  margin-bottom: 1rem;
 `;
 
 const CategoriesRow = styled.div`
@@ -30,7 +33,7 @@ const Category = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3rem;
+  margin: 1rem 3.5rem;
 `;
 
 const CategoryName = styled.h3`
@@ -39,11 +42,12 @@ const CategoryName = styled.h3`
 `;
 
 const CategoryImage = styled.img`
-  width: 250px;
-  height: 350px;
-
+  width: 275px;
+  height: 325px;
+  transition: 0.5s all ease-out;
   &:hover {
     cursor: pointer;
+    box-shadow: 5px 5px 5px #00cba6;
   }
 `;
 
@@ -51,6 +55,7 @@ const Heading = styled.h1`
   color: white;
   font-family: 'Archivo', sans-serif;
   margin-top: 3rem;
+  margin-bottom: 0;
 `;
 
 const unixStartDate = Math.round(new Date().getTime() / 1000);
