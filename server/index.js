@@ -1,19 +1,19 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const session = require("express-session");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const cookieSession = require("cookie-session");
-const User = require("./models/User");
-require("dotenv").config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const cookieSession = require('cookie-session');
+const User = require('./models/User');
+require('dotenv').config();
 
 const app = express();
-const axios = require("axios");
+const axios = require('axios');
 
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(
   cookieSession({
@@ -50,7 +50,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleID: profile.id }).then((currentUser) => {
@@ -77,29 +77,39 @@ passport.use(
 );
 
 app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
   })
 );
 
 app.get(
-  "/auth/google/callback",
-  passport.authenticate("google"),
+  '/auth/google/callback',
+  passport.authenticate('google'),
   (request, response) => {
-    response.redirect("http://localhost:3000"); // redirect after login
+    response.redirect('http://localhost:3000/Dashboard'); // redirect after login
   }
 );
 
-app.get("/getUser", (request, response) => {
+app.get('/getUser', (request, response) => {
   response.send(request.user);
 });
 
-app.post("/api/search", (request, response) => {
-  console.log("the parameters are:", request.body);
+app.get('/auth/logout', (request, response) => {
+  console.log(request.user);
+  if (request.user) {
+    request.logout();
+    console.log(request.user);
+    //response.redirect('http://localhost:3000');
+  }
+  response.sendStatus(200);
+});
+
+app.post('/api/search', (request, response) => {
+  console.log('the parameters are:', request.body);
 
   var config = {
-    method: "get",
+    method: 'get',
     url: `https://api.yelp.com/v3/events?latitude=${request.body.latitude}&longitude=${request.body.longitude}&categories=${request.body.type}&start_date=${request.body.startDate}&limit=${request.body.limit}&radius=${request.body.radius}`,
     headers: {
       Authorization: `Bearer ${process.env.YELP_KEY}`,

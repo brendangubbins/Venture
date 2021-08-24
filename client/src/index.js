@@ -1,12 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import Context from "./Context";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-ReactDOM.render(
-  <Context>
-    <App />
-  </Context>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById('root'));

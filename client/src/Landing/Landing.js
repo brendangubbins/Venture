@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import Adventure from "../Images/Adventure.png";
+import axios from "axios";
+import Context from "../Context";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -77,8 +80,27 @@ const ImageContainer = styled.img`
 
 //renders the landing page
 const Landing = () => {
+  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
+    useContext(Context);
+
+  useEffect(() => {
+    console.log("userObject retrieved in Landing", userObject);
+  }, []);
+
   const handleGoogleLogin = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    axios
+      .get("http://localhost:5000/getUser", { withCredentials: true })
+      .then((response) => {
+        if (response.data) {
+          setUserObject(response.data);
+          window.open("http://localhost:3000/Dashboard", "_self");
+        } else {
+          window.open("http://localhost:5000/auth/google", "_self");
+        }
+      })
+      .catch((error) => {
+        console.log("error logging in", error);
+      });
   };
 
   return (
@@ -88,7 +110,9 @@ const Landing = () => {
           <Header>Enter Slogan Here</Header>
           <Description>Enter Description Here</Description>
           <ButtonWrap>
+            {/* <Link to="/Dashboard" onClick={handleGoogleLogin}> */}
             <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>
+            {/* </Link> */}
           </ButtonWrap>
         </TextWrapper>
       </LeftAlign>

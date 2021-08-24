@@ -7,15 +7,6 @@ import { BiCalendar } from 'react-icons/bi';
 
 export const SidebarData = [
   {
-    title: 'Discover',
-    icon: (
-      <IconContext.Provider value={{ size: '1.5rem', color: '#72A7CF' }}>
-        <MdDashboard />
-      </IconContext.Provider>
-    ),
-    path: '/Discover',
-  },
-  {
     title: 'Dashboard',
     icon: (
       <IconContext.Provider value={{ size: '1.5rem', color: '#72A7CF' }}>
@@ -23,6 +14,15 @@ export const SidebarData = [
       </IconContext.Provider>
     ),
     path: '/Dashboard',
+  },
+  {
+    title: 'Discover',
+    icon: (
+      <IconContext.Provider value={{ size: '1.5rem', color: '#72A7CF' }}>
+        <MdDashboard />
+      </IconContext.Provider>
+    ),
+    path: '/Discover',
   },
   {
     title: 'Info/About',
