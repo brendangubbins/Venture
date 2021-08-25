@@ -3,6 +3,7 @@ import React from "react";
 import { Text, Box, Image, Button, Badge } from "@chakra-ui/react";
 import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
 import Adventure from "../Images/Adventure.png";
+import {format, fromUnixTime, parseISO} from 'date-fns';
 // const Container = styled.div`
 //   display: flex;
 //   width: 20%;
@@ -52,6 +53,7 @@ import Adventure from "../Images/Adventure.png";
 // `;
 
 const ResultCard = ({ event }) => {
+  console.log("Properties: ", Object.getOwnPropertyNames(event));
   console.log("Event page event", event);
 
   //Address
@@ -60,7 +62,13 @@ const ResultCard = ({ event }) => {
   let dateString = event.time_start.substring(0, 10);
   let dateArr = dateString.split("-");
   dateArr.push(dateArr.shift());
-  let date = dateArr.join("-");
+  // let date = dateArr.join("-");
+  let parsedISODate = parseISO(event.time_start); //parse incoming ISO 8601 date and turn into Date object
+  
+  let ISODate = format(parsedISODate, "yyyy-M-dd h:mm aaaaa'm'"); //format Date object
+  //console.log("example here: ", ISODate);
+
+  
 
   //parse the time to a more readable format
   let timeString = event.time_start.substring(12, 19).split(":");
@@ -127,8 +135,8 @@ const ResultCard = ({ event }) => {
         </Text>
         <Text fontSize=".8rem" py={2} color="white" textAlign="left">
           <CalendarIcon marginRight=".5rem" />
-          {date}
-          {time}
+          {ISODate}
+          {/* {time} */}
         </Text>
         <Text fontSize=".8rem" py={2} color="white" textAlign="left">
           <AtSignIcon /> {address}
