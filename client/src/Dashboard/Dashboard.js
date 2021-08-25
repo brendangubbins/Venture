@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import Context from '../Context';
 import axios from 'axios';
 import EventImage from '../Images/event.jpg';
+import eventService from '../services/events';
 
 const Wrapper = styled.div`
   display: flex;
@@ -85,13 +86,16 @@ const Dashboard = () => {
     useContext(Context);
 
   const [eventSelected, setEventSelected] = useState(0);
+  const [userEvents, setUserEvents] = useState([]);
 
   useEffect(() => {
     axios
       .get('http://localhost:5000/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
-        console.log('userObject retrieved in Dashboard', userObject);
+        setUserEvents(response.data.upcomingEvents);
+        // console.log(response.data.upcomingEvents);
+        // console.log('userObject retrieved in Dashboard', userObject);
       })
       .catch((error) => console.log(error));
   }, []);

@@ -6,6 +6,9 @@ const userSchema = new mongoose.Schema({
   googleID: String,
   email: String,
   avatar: String,
+  upcomingEvents: [
+    Object
+  ],
 });
 
 userSchema.set('toJSON', {
