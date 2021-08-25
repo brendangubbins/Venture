@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Trending from './Trending';
 import Feed from './Feed';
 import Sidebar from '../Sidebar/Sidebar';
 import Context from '../Context';
 import axios from 'axios';
+import EventImage from '../Images/event.jpg';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,11 +33,38 @@ const Events = styled.div`
   // margin: 2rem 0;
 `;
 
-const Event = styled.div`
-  background: #c4c4c4;
-  height: 300px;
-  width: 300px;
+const EventWrapper = styled.div`
+  position: relative;
+  height: 290px;
+  max-width: 250px;
   margin: 1rem 1rem 2.5rem 1rem;
+`;
+
+const Event = styled.img`
+  // background: #c4c4c4;
+  height: 290px;
+  max-width: 250px;
+`;
+
+const TextWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  transition: 0.1s all ease-out;
+  visibility: ${(props) => {
+    return props.visibility ? 'visible' : 'hidden';
+  }};
+`;
+
+const EventText = styled.p`
+  color: white;
 `;
 
 const Title = styled.h3`
@@ -56,6 +84,8 @@ const Dashboard = () => {
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
 
+  const [eventSelected, setEventSelected] = useState(0);
+
   useEffect(() => {
     axios
       .get('http://localhost:5000/getUser', { withCredentials: true })
@@ -66,23 +96,89 @@ const Dashboard = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const dummyImages1 = [
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+  ];
+
+  const dummyImages2 = [
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+    {
+      title: 'Cap image',
+      description: 'A Cap image',
+      image: EventImage,
+    },
+  ];
+
   return (
     <Wrapper>
       <Sidebar />
       <UserEvents>
         <Title>Upcoming Events</Title>
         <Events>
-          <Event></Event>
-          <Event></Event>
-          <Event></Event>
-          <Event></Event>
+          {dummyImages1.map((data, key) => {
+            return (
+              <EventWrapper
+                onMouseEnter={() => setEventSelected(key)}
+                onMouseLeave={() => setEventSelected(null)}
+              >
+                <Event src={data.image} key={key} />
+                <TextWrapper visibility={eventSelected === key}>
+                  <EventText>{data.title}</EventText>
+                  <EventText>{data.description}</EventText>
+                </TextWrapper>
+              </EventWrapper>
+            );
+          })}
         </Events>
         {/* <Title>Past Events</Title> */}
         <Events>
-          <Event></Event>
-          <Event></Event>
-          <Event></Event>
-          <Event></Event>
+          {dummyImages2.map((data, key) => {
+            return (
+              <EventWrapper
+                onMouseEnter={() => setEventSelected(key + 4)}
+                onMouseLeave={() => setEventSelected(null)}
+              >
+                <Event src={data.image} key={key} />
+                <TextWrapper visibility={eventSelected === key + 4}>
+                  <EventText>{data.title}</EventText>
+                  <EventText>{data.description}</EventText>
+                </TextWrapper>
+              </EventWrapper>
+            );
+          })}
         </Events>
       </UserEvents>
       <Social>
