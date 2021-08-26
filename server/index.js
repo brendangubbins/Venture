@@ -92,10 +92,11 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google'),
   (request, response) => {
-    response.redirect('http://localhost:3000/Dashboard'); // redirect after login
+    response.redirect('http://localhost:3000/Dashboard'); // redirect the user to their dashboard after login
   }
 );
 
+// retrieve the user's data from DB
 app.get('/getUser', (request, response) => {
   response.send(request.user);
 });
@@ -105,11 +106,11 @@ app.get('/auth/logout', (request, response) => {
   if (request.user) {
     request.logout();
     console.log(request.user);
-    //response.redirect('http://localhost:3000');
   }
   response.sendStatus(200);
 });
 
+// Yelp search to find nearby events based on location and current date
 app.post('/api/search', (request, response) => {
   console.log('the parameters are:', request.body);
 
