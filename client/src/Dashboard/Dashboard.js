@@ -80,6 +80,7 @@ const TextWrapper = styled.div`
 
 const EventText = styled.p`
   color: white;
+  text-align: center;
 `;
 
 const Title = styled.h3`

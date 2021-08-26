@@ -26,7 +26,9 @@ const TrendingWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+//Returns trending data on dashboard
 const Trending = () => {
+  //trending data to be displayed
   const trendingData = [
     {
       name: "C7 Hackathon",

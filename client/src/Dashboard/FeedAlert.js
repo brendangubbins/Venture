@@ -29,6 +29,7 @@ const Avatar = styled.img`
   margin: 0.5rem;
 `;
 
+//Passes the feed data to be displayed
 const FeedAlert = ({ data }) => {
   return (
     <Wrapper>

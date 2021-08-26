@@ -19,6 +19,7 @@ const ContentWrapper = styled.div`
   margin-top: 101px;
 `;
 
+//Returns the results in cards
 const Results = ({ yelpEvents }) => {
   console.log("These are my yelp events in results", yelpEvents);
 

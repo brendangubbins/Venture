@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Adventure from "../Images/Adventure.png";
 import axios from "axios";
 import Context from "../Context";
-// import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,8 +80,7 @@ const ImageContainer = styled.img`
 
 //renders the landing page
 const Landing = () => {
-  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
-    useContext(Context);
+  const { userObject, setUserObject } = useContext(Context);
 
   useEffect(() => {
     console.log("userObject retrieved in Landing", userObject);
@@ -111,9 +109,7 @@ const Landing = () => {
           <Header>Your Next Adventure Awaits</Header>
           <Description>Find events near you</Description>
           <ButtonWrap>
-            {/* <Link to="/Dashboard" onClick={handleGoogleLogin}> */}
             <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>
-            {/* </Link> */}
           </ButtonWrap>
         </TextWrapper>
       </LeftAlign>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import venture from "../Images/venture.png";
 
 const Nav = styled.div`
   display: flex;
@@ -13,17 +14,21 @@ const Nav = styled.div`
   position: fixed;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+`;
+
 const Logo = styled.h3`
   font-family: "Archivo", sans-serif;
   font-size: 3rem;
   color: white;
   margin-left: 1.5rem;
   font-weight: bold;
-  /* text-decoration: none; */
   transition: 0.2s all ease-out;
   &:hover {
     color: #00cba6;
-    /* transform: scale(1.1, 1.1); */
   }
 `;
 
@@ -54,11 +59,14 @@ const AboutButton = styled.button`
 const Navbar = () => {
   return (
     <Nav>
-      <Logo>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          Venture
-        </Link>
-      </Logo>
+      <Wrapper>
+        <img src={venture} height="50px" width="50px" />
+        <Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            Venture
+          </Link>
+        </Logo>
+      </Wrapper>
       <ButtonWrap>
         <Link
           to="/About"
