@@ -88,7 +88,6 @@ const categoryToResults = async (category) => {
       radius: 40000,
     },
   });
-  // console.log("These are my results from the function", yelpAPIResults);
   //use the yelp api results and store in state
   return yelpAPIResults.data;
 };
@@ -96,7 +95,6 @@ const categoryToResults = async (category) => {
 function Discover() {
   const firstRowEvents = DiscoverEvents.slice(0, 3);
   const secondRowEvents = DiscoverEvents.slice(3, 6);
-  //const [eventResults, setEventResults] = useState([]);
 
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);

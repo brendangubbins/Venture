@@ -1,12 +1,10 @@
-import React, { useEffect, useContext, useState } from "react";
-import styled from "styled-components";
-import Trending from "./Trending";
-import Feed from "./Feed";
-import Sidebar from "../Sidebar/Sidebar";
-import Context from "../Context";
-import axios from "axios";
-import EventImage from "../Images/event.jpg";
-import eventService from "../services/events";
+import React, { useEffect, useContext, useState } from 'react';
+import styled from 'styled-components';
+import Trending from './Trending';
+import Feed from './Feed';
+import Sidebar from '../Sidebar/Sidebar';
+import Context from '../Context';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,9 +12,6 @@ const Wrapper = styled.div`
   height: 100vh;
   justify-content: space-between;
   overflow-y: hidden;
-  /* flex-direction: column; */
-  // margin-left: 5rem;
-  // margin-bottom: 2rem;
 `;
 
 const MainColumnContainer = styled.div`
@@ -33,18 +28,8 @@ const UserEvents = styled.div`
   width: 100%;
   height: 80%;
   display: flex;
-  // flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  // justify-content: center;
-  // margin-left: 307px;
-  // margin-top: 101px;
-`;
-
-const Events = styled.div`
-  display: flex;
-  width: 85%;
-  // margin: 2rem 0;
 `;
 
 const EventWrapper = styled.div`
@@ -56,7 +41,6 @@ const EventWrapper = styled.div`
 `;
 
 const Event = styled.img`
-  // background: #c4c4c4;
   height: 290px;
   width: 250px;
 `;
@@ -74,7 +58,7 @@ const TextWrapper = styled.div`
   background: rgba(0, 0, 0, 0.85);
   transition: 0.1s all ease-out;
   visibility: ${(props) => {
-    return props.visible ? "visible" : "hidden";
+    return props.visible ? 'visible' : 'hidden';
   }};
 `;
 
@@ -84,15 +68,13 @@ const EventText = styled.p`
 
 const Title = styled.h3`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 3.5rem;
-  // margin: 0 0 2rem 0;
 `;
 
 const Social = styled.div`
   width: 35%;
   margin-top: 2.7rem;
-  /* border: 1px solid red; */
   flex-direction: column;
 `;
 
@@ -105,7 +87,7 @@ const Dashboard = () => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getUser", { withCredentials: true })
+      .get('http://localhost:5000/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
         setUserEvents(response.data.upcomingEvents);
@@ -136,41 +118,6 @@ const Dashboard = () => {
               </EventWrapper>
             );
           })}
-          {/* <Events>
-          {firstRowEvents.map((data, key) => {
-            return (
-              <EventWrapper
-                onMouseEnter={() => setEventSelected(key)}
-                onMouseLeave={() => setEventSelected(null)}
-                key={key}
-              >
-                <Event src={data.image} />
-                <TextWrapper visible={eventSelected === key}>
-                  <EventText>{data.title}</EventText>
-                  <EventText>{data.description}</EventText>
-                </TextWrapper>
-              </EventWrapper>
-            );
-          })}
-        </Events>
-
-        <Events>
-          {secondRowEvents.map((data, key) => {
-            return (
-              <EventWrapper
-                onMouseEnter={() => setEventSelected(key + 4)}
-                onMouseLeave={() => setEventSelected(null)}
-                key={key}
-              >
-                <Event src={data.image} />
-                <TextWrapper visible={eventSelected === key + 4}>
-                  <EventText>{data.title}</EventText>
-                  <EventText>{data.description}</EventText>
-                </TextWrapper>
-              </EventWrapper>
-            );
-          })}
-        </Events> */}
         </UserEvents>
       </MainColumnContainer>
       <Social>
