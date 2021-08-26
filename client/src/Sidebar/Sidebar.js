@@ -20,7 +20,7 @@ const UserInformtion = styled.div`
   align-items: center;
   background: #071221;
   border-bottom: #00cba6 1px solid;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 `;
 const UserImage = styled.img`
   border-radius: 100px;
@@ -51,7 +51,6 @@ const Username = styled.h2`
   font-family: 'Archivo', sans-serif;
   text-align: left;
   margin-top: 0;
-  margin-bottom: 1rem;
   font-size: 1.125rem;
   width: 100%;
 `;
@@ -83,6 +82,8 @@ const EventInfoHeader = styled.h2`
   font-family: 'Archivo', sans-serif;
   text-align: center;
   font-size: 1.125rem;
+  margin: 0.3rem 0;
+  // width: 88%;
 `;
 
 const ImgSkele = styled.div`
@@ -186,7 +187,7 @@ const Sidebar = () => {
           {/* <UserBio>Short bio statement</UserBio> */}
         </NameBioContainer>
       </UserInformtion>
-      <EventInfoHeader>Upcoming Event</EventInfoHeader>
+      <EventInfoHeader>Next Event</EventInfoHeader>
       <EventInformation>
         <EventImage src={CTP} />
         <NameLocationContainer>
