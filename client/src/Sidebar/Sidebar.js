@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import CTP from '../Images/CTP.png';
 import Context from '../Context';
 import axios from 'axios';
-import Venture from '../Images/venture.png';
 
 const Wrapper = styled.div`
   background: #071221;
@@ -135,12 +134,6 @@ const MenuListItem = styled.li`
   align-items: center;
 `;
 
-// const LogoContainer = styled.div`
-//   display: flex;
-//   height: 100%;
-//   align-items: flex-end;
-// `;
-
 const LogoImage = styled.img`
   margin: 0 auto;
   margin-top: 22rem;
@@ -185,7 +178,6 @@ const Sidebar = () => {
           ) : (
             <SkeletonText />
           )}
-          {/* <UserBio>Short bio statement</UserBio> */}
         </NameBioContainer>
       </UserInformtion>
       <EventInfoHeader>Next Event</EventInfoHeader>
@@ -222,8 +214,6 @@ const Sidebar = () => {
           );
         })}
       </MenuList>
-
-      <LogoImage src={Venture} />
     </Wrapper>
   );
 };
