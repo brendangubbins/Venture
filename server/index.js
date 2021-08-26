@@ -6,6 +6,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cookieSession = require('cookie-session');
 const User = require('./models/User');
+const eventsRouter = require('./controllers/events');
 require('dotenv').config();
 
 const app = express();
@@ -31,6 +32,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/api/events', eventsRouter);
 
 mongoose.connect(process.env.MONGODB, {
   useNewUrlParser: true,
@@ -58,12 +61,14 @@ passport.use(
           done(null, currentUser);
         } else {
           console.log(profile);
+
           new User({
             googleID: profile.id,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             email: profile.emails[0].value,
             avatar: profile.photos[0].value,
+            upcomingEvents: [],
           })
             .save()
             .then((newUser) => {

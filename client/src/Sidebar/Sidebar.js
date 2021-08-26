@@ -119,6 +119,7 @@ const MenuHeader = styled.p`
   font-size: 1.2rem;
   font-family: "Archivo", sans-serif;
   margin-left: 1rem;
+  margin-top: 1rem;
 `;
 
 const MenuList = styled.ul`
@@ -126,6 +127,7 @@ const MenuList = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   height: 15%;
+  margin: 1rem 0 0 1rem;
 `;
 
 const MenuListItem = styled.li`

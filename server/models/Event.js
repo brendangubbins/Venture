@@ -1,8 +1,25 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const eventSchema = new mongoose.Schema({
-  // WIP
+  name: String,
+  description: String,
+  image: String,
+  location: Object,
+  time_start: String,
+  category: String,
+  is_free: Boolean,
+  business_id: { type: String, unique: true },
+
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }
+  ],
 });
+
+eventSchema.plugin(uniqueValidator);
 
 eventSchema.set('toJSON', {
   transform: (document, returnedObject) => {
