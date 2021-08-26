@@ -7,9 +7,11 @@ import { format, parseISO } from "date-fns";
 import axios from "axios";
 import Context from "../Context";
 import eventService from "../services/events";
+import { useToast } from "@chakra-ui/react";
 
 //renders a card that displays events from api response
 const ResultCard = ({ event }) => {
+  const toast = useToast();
   //console.log("Properties: ", Object.getOwnPropertyNames(event));
   //console.log("Event page event", event);
 
@@ -35,7 +37,7 @@ const ResultCard = ({ event }) => {
   }
   timeString[0] = parseInt(timeString % 12).toString();
   timeString.push(part);
-  let time = timeString.join(":");
+  // let time = timeString.join(":");
 
   const { userObject, setUserObject } = useContext(Context);
 
@@ -50,22 +52,41 @@ const ResultCard = ({ event }) => {
   }, []);
 
   const saveEvent = () => {
-    const newEvent = {
-      name: event.name,
-      description: event.description,
-      location: address,
-      time_start: ISODate,
-      category: event.category,
-      is_free: event.is_free,
-      business_id: event.business_id,
-      id: userObject.id,
-      image: event.image_url,
-    };
+    if (userObject.upcomingEvents.length >= 8) {
+      toast({
+        title: "Oops!",
+        description: "You have the maximum amount of events",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Yay!",
+        description: "Event added",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+      const newEvent = {
+        name: event.name,
+        description: event.description,
+        location: address,
+        time_start: ISODate,
+        category: event.category,
+        is_free: event.is_free,
+        business_id: event.business_id,
+        id: userObject.id,
+        image: event.image_url,
+      };
 
-    eventService
-      .create(newEvent)
-      .then((returnedEvent) => console.log("Returned event: ", returnedEvent));
-    setIsVisible(false);
+      eventService
+        .create(newEvent)
+        .then((returnedEvent) =>
+          console.log("Returned event: ", returnedEvent)
+        );
+      setIsVisible(false);
+    }
   };
 
   const [isVisble, setIsVisible] = useState(true);
