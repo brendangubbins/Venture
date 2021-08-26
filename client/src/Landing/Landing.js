@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Adventure from "../Images/Adventure.png";
 import axios from "axios";
 import Context from "../Context";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const Header = styled.h1`
   text-align: center;
   font-weight: bold;
   font-size: 4.5rem;
-  /* margin-top: 5rem; */
+  margin-top: 5rem;
 `;
 
 const Description = styled.h3`
@@ -54,7 +54,7 @@ const LoginButton = styled.button`
   background-color: #00cba6;
   border-radius: 20px;
   color: white;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 1.5rem;
   width: 175px;
   padding: 1rem;
@@ -76,7 +76,7 @@ const ImageContainer = styled.img`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 10rem;
 `;
 
 //renders the landing page
@@ -108,8 +108,8 @@ const Landing = () => {
     <Wrapper>
       <LeftAlign>
         <TextWrapper>
-          <Header>Enter Slogan Here</Header>
-          <Description>Enter Description Here</Description>
+          <Header>Your Next Adventure Awaits</Header>
+          <Description>Find events near you</Description>
           <ButtonWrap>
             {/* <Link to="/Dashboard" onClick={handleGoogleLogin}> */}
             <LoginButton onClick={handleGoogleLogin}>Login</LoginButton>

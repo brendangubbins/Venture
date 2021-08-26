@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Nav = styled.div`
   display: flex;
@@ -14,10 +14,11 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.h3`
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   font-size: 3rem;
   color: white;
   margin-left: 1.5rem;
+  font-weight: bold;
   /* text-decoration: none; */
   transition: 0.2s all ease-out;
   &:hover {
@@ -35,7 +36,7 @@ const AboutButton = styled.button`
   border-radius: 10px;
   color: white;
   margin-top: 0.5rem;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   font-weight: bold;
   font-size: 1rem;
   width: 8rem;
@@ -54,17 +55,18 @@ const Navbar = () => {
   return (
     <Nav>
       <Logo>
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          CTP Hack
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          Venture
         </Link>
       </Logo>
       <ButtonWrap>
-        <AboutButton
+        <Link
           to="/About"
-          style={{ textDecoration: 'none', color: 'white' }}
+          style={{ textDecoration: "none", color: "white" }}
+          target="_blank"
         >
-          About
-        </AboutButton>
+          <AboutButton>About</AboutButton>
+        </Link>
       </ButtonWrap>
     </Nav>
   );

@@ -1,74 +1,23 @@
 import React from "react";
-// import styled from "styled-components";
-import { Text, Box, Image, Button, Badge } from "@chakra-ui/react";
+import { Text, Box, Image, Button } from "@chakra-ui/react";
 import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
 import Adventure from "../Images/Adventure.png";
-import {format, fromUnixTime, parseISO} from 'date-fns';
-// const Container = styled.div`
-//   display: flex;
-//   width: 20%;
-//   height: 20%;
-//   background-color: white;
-//   margin: 1rem;
-//   justify-content: center;
-//   align-items: center;
-// `;
+import { format, parseISO } from "date-fns";
 
-// const Card = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   flex-wrap: wrap;
-//   width: 100%;
-//   height: 100%;
-// `;
-
-// const Image = styled.img`
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 250px;
-// `;
-
-// const Name = styled.h3`
-//   font-family: "Archivo", sans-serif;
-//   font-size: 1.5rem;
-//   color: black;
-//   justify-content: center;
-// `;
-
-// const Location = styled.h4`
-//   font-family: "Archivo", sans-serif;
-//   font-size: 1rem;
-//   color: black;
-//   justify-content: black;
-// `;
-
-// const Description = styled.h4`
-//   font-family: "Archivo", sans-serif;
-//   font-size: 0.5rem;
-//   color: black;
-//   text-align: center;
-//   overflow-y: hidden;
-// `;
-
+//renders a card that displays events from api response
 const ResultCard = ({ event }) => {
   console.log("Properties: ", Object.getOwnPropertyNames(event));
   console.log("Event page event", event);
 
-  //Address
+  //Address in form of array, join the data to display
   let address = event.location.display_address.join(" ");
+
   //parse the date to a more readable format
   let dateString = event.time_start.substring(0, 10);
   let dateArr = dateString.split("-");
   dateArr.push(dateArr.shift());
-  // let date = dateArr.join("-");
   let parsedISODate = parseISO(event.time_start); //parse incoming ISO 8601 date and turn into Date object
-  
   let ISODate = format(parsedISODate, "yyyy-M-dd h:mm aaaaa'm'"); //format Date object
-  //console.log("example here: ", ISODate);
-
-  
 
   //parse the time to a more readable format
   let timeString = event.time_start.substring(12, 19).split(":");
@@ -81,7 +30,7 @@ const ResultCard = ({ event }) => {
   }
   timeString[0] = parseInt(timeString % 12).toString();
   timeString.push(part);
-  let time = timeString.join(":");
+
   return (
     <Box
       w="400px"
@@ -97,7 +46,7 @@ const ResultCard = ({ event }) => {
         boxShadow: "5px 5px 5px #00cba6",
       }}
     >
-      {/* //Some api responses don't have an image, if they don't make their image the adventure image */}
+      {/* Some api responses don't have an image, if they don't make their image the default image */}
       {event.image_url ? (
         <Image
           width="100%"
@@ -136,7 +85,6 @@ const ResultCard = ({ event }) => {
         <Text fontSize=".8rem" py={2} color="white" textAlign="left">
           <CalendarIcon marginRight=".5rem" />
           {ISODate}
-          {/* {time} */}
         </Text>
         <Text fontSize=".8rem" py={2} color="white" textAlign="left">
           <AtSignIcon /> {address}
