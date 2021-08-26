@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from 'react';
 // import styled from "styled-components";
-import { Text, Box, Image, Button, Badge } from "@chakra-ui/react";
-import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
-import Adventure from "../Images/Adventure.png";
+import { Text, Box, Image, Button, Badge } from '@chakra-ui/react';
+import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from '@chakra-ui/icons';
+import Adventure from '../Images/Adventure.png';
 import { format, fromUnixTime, parseISO } from 'date-fns';
 import axios from 'axios';
 import Context from '../Context';
-import eventService from "../services/events";
+import eventService from '../services/events';
 
 // const Container = styled.div`
 //   display: flex;
@@ -61,10 +61,10 @@ const ResultCard = ({ event }) => {
   //console.log("Event page event", event);
 
   //Address
-  let address = event.location.display_address.join(" ");
+  let address = event.location.display_address.join(' ');
   //parse the date to a more readable format
   let dateString = event.time_start.substring(0, 10);
-  let dateArr = dateString.split("-");
+  let dateArr = dateString.split('-');
   dateArr.push(dateArr.shift());
   // let date = dateArr.join("-");
   let parsedISODate = parseISO(event.time_start); //parse incoming ISO 8601 date and turn into Date object
@@ -72,20 +72,18 @@ const ResultCard = ({ event }) => {
   let ISODate = format(parsedISODate, "yyyy-M-dd h:mm aaaaa'm'"); //format Date object
   //console.log("example here: ", ISODate);
 
-
-
   //parse the time to a more readable format
-  let timeString = event.time_start.substring(12, 19).split(":");
+  let timeString = event.time_start.substring(12, 19).split(':');
   // console.log("TimeString is ", timeString);
   let part;
   if (parseInt(timeString[0]) > 12) {
-    part = "P.M";
+    part = 'P.M';
   } else {
-    part = "A.M";
+    part = 'A.M';
   }
   timeString[0] = parseInt(timeString % 12).toString();
   timeString.push(part);
-  let time = timeString.join(":");
+  let time = timeString.join(':');
 
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
@@ -101,7 +99,6 @@ const ResultCard = ({ event }) => {
   }, []);
 
   const saveEvent = () => {
-
     const newEvent = {
       name: event.name,
       description: event.description,
@@ -111,10 +108,13 @@ const ResultCard = ({ event }) => {
       is_free: event.is_free,
       business_id: event.business_id,
       id: userObject.id,
-    }
+      image: event.image_url,
+    };
 
-    eventService.create(newEvent).then(returnedEvent => console.log('Returned event: ', returnedEvent));
-  }
+    eventService
+      .create(newEvent)
+      .then((returnedEvent) => console.log('Returned event: ', returnedEvent));
+  };
 
   return (
     <Box
@@ -127,8 +127,8 @@ const ResultCard = ({ event }) => {
       mt="2rem"
       transition="0.5s all ease-out"
       _hover={{
-        transform: "scale(1.05, 1.05)",
-        boxShadow: "5px 5px 5px #00cba6",
+        transform: 'scale(1.05, 1.05)',
+        boxShadow: '5px 5px 5px #00cba6',
       }}
     >
       {/* //Some api responses don't have an image, if they don't make their image the adventure image */}
@@ -183,7 +183,11 @@ const ResultCard = ({ event }) => {
         </Text>
         <Text mt=".3rem">
           <AddIcon color="white" mr=".5rem" />
-          <Button onClick={saveEvent} bgColor="#00cba6" _hover={{ bgColor: "#00b795" }}>
+          <Button
+            onClick={saveEvent}
+            bgColor="#00cba6"
+            _hover={{ bgColor: '#00b795' }}
+          >
             Add
           </Button>
         </Text>

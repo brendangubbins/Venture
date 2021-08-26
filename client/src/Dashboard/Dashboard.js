@@ -18,14 +18,26 @@ const Wrapper = styled.div`
   // margin-bottom: 2rem;
 `;
 
-const UserEvents = styled.div`
-  width: 100%;
+const MainColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 100%;
   margin-left: 307px;
-  margin-top: 101px;
+`;
+
+const UserEvents = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  // justify-content: center;
+  // margin-left: 307px;
+  // margin-top: 101px;
 `;
 
 const Events = styled.div`
@@ -37,14 +49,15 @@ const Events = styled.div`
 const EventWrapper = styled.div`
   position: relative;
   height: 290px;
-  max-width: 250px;
-  margin: 1rem 1rem 2.5rem 1rem;
+  width: 250px;
+  margin: 0.5rem 1rem 1rem 2rem;
+  box-shadow: 5px 5px 5px black;
 `;
 
 const Event = styled.img`
   // background: #c4c4c4;
   height: 290px;
-  max-width: 250px;
+  width: 250px;
 `;
 
 const TextWrapper = styled.div`
@@ -60,7 +73,7 @@ const TextWrapper = styled.div`
   background: rgba(0, 0, 0, 0.85);
   transition: 0.1s all ease-out;
   visibility: ${(props) => {
-    return props.visibility ? 'visible' : 'hidden';
+    return props.visible ? 'visible' : 'hidden';
   }};
 `;
 
@@ -72,7 +85,7 @@ const Title = styled.h3`
   color: white;
   font-family: 'Archivo', sans-serif;
   font-size: 3.5rem;
-  margin: 0 0 2rem 0;
+  // margin: 0 0 2rem 0;
 `;
 
 const Social = styled.div`
@@ -85,81 +98,52 @@ const Dashboard = () => {
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
 
-  const [eventSelected, setEventSelected] = useState(0);
+  const [eventSelected, setEventSelected] = useState(null);
   const [userEvents, setUserEvents] = useState([]);
-
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     axios
       .get('http://localhost:5000/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
         setUserEvents(response.data.upcomingEvents);
-        // console.log(response.data.upcomingEvents);
+        console.log(response.data.upcomingEvents);
         // console.log('userObject retrieved in Dashboard', userObject);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const dummyImages1 = [
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-  ];
-
-  const dummyImages2 = [
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-    {
-      title: 'Cap image',
-      description: 'A Cap image',
-      image: EventImage,
-    },
-  ];
-
   return (
     <Wrapper>
       <Sidebar />
-      <UserEvents>
+      <MainColumnContainer>
         <Title>Upcoming Events</Title>
-        <Events>
-          {dummyImages1.map((data, key) => {
+        <UserEvents>
+          {userEvents.map((data, key) => {
             return (
               <EventWrapper
                 onMouseEnter={() => setEventSelected(key)}
                 onMouseLeave={() => setEventSelected(null)}
+                key={key}
               >
-                <Event src={data.image} key={key} />
-                <TextWrapper visibility={eventSelected === key}>
+                <Event src={data.image} />
+                <TextWrapper visible={eventSelected === key}>
+                  <EventText>{data.title}</EventText>
+                  <EventText>{data.description}</EventText>
+                </TextWrapper>
+              </EventWrapper>
+            );
+          })}
+          {/* <Events>
+          {firstRowEvents.map((data, key) => {
+            return (
+              <EventWrapper
+                onMouseEnter={() => setEventSelected(key)}
+                onMouseLeave={() => setEventSelected(null)}
+                key={key}
+              >
+                <Event src={data.image} />
+                <TextWrapper visible={eventSelected === key}>
                   <EventText>{data.title}</EventText>
                   <EventText>{data.description}</EventText>
                 </TextWrapper>
@@ -167,24 +151,26 @@ const Dashboard = () => {
             );
           })}
         </Events>
-        {/* <Title>Past Events</Title> */}
+
         <Events>
-          {dummyImages2.map((data, key) => {
+          {secondRowEvents.map((data, key) => {
             return (
               <EventWrapper
                 onMouseEnter={() => setEventSelected(key + 4)}
                 onMouseLeave={() => setEventSelected(null)}
+                key={key}
               >
-                <Event src={data.image} key={key} />
-                <TextWrapper visibility={eventSelected === key + 4}>
+                <Event src={data.image} />
+                <TextWrapper visible={eventSelected === key + 4}>
                   <EventText>{data.title}</EventText>
                   <EventText>{data.description}</EventText>
                 </TextWrapper>
               </EventWrapper>
             );
           })}
-        </Events>
-      </UserEvents>
+        </Events> */}
+        </UserEvents>
+      </MainColumnContainer>
       <Social>
         <Trending />
         <Feed />
