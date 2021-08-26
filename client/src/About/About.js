@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Flex,
   Text,
@@ -7,77 +7,77 @@ import {
   Link,
   Image,
   Tooltip,
-} from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import celebratingTogether from "../Images/celebratingTogether.png";
-import javascript from "../Images/javascript.svg";
-import react from "../Images/react.svg";
-import google from "../Images/google.svg";
-import nodejs from "../Images/nodejs.svg";
-import mongodb from "../Images/mongodb.svg";
-import express from "../Images/express.svg";
-import Chakra from "../Images/Chakra.png";
-import StyledComponents from "../Images/StyledComponents.png";
-import passport from "../Images/passport.png";
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import celebratingTogether from '../Images/celebratingTogether.png';
+import javascript from '../Images/javascript.svg';
+import react from '../Images/react.svg';
+import google from '../Images/google.svg';
+import nodejs from '../Images/nodejs.svg';
+import mongodb from '../Images/mongodb.svg';
+import express from '../Images/express.svg';
+import Chakra from '../Images/Chakra.png';
+import StyledComponents from '../Images/StyledComponents.png';
+import passport from '../Images/passport.png';
 
 //Renders the About page
 const About = () => {
   //all devs for the project
   let devs = [
     {
-      name: "Abedin Kadir",
-      link: "https://github.com/auto-kad",
+      name: 'Abedin Kadir',
+      link: 'https://github.com/auto-kad',
     },
     {
-      name: "Brendan Gubbins",
-      link: "https://github.com/brendangubbins",
+      name: 'Brendan Gubbins',
+      link: 'https://github.com/brendangubbins',
     },
     {
-      name: "Edward Paez",
-      link: "https://github.com/epaez1996",
+      name: 'Edward Paez',
+      link: 'https://github.com/epaez1996',
     },
     {
-      name: "Harjit Liyal",
-      link: "https://github.com/Slaeh",
+      name: 'Harjit Liyal',
+      link: 'https://github.com/Slaeh',
     },
   ];
 
   //All technologies used
   let icons = [
     {
-      name: "JavaScript",
+      name: 'JavaScript',
       image: javascript,
     },
     {
-      name: "React",
+      name: 'React',
       image: react,
     },
     {
-      name: "ChakraUI",
+      name: 'ChakraUI',
       image: Chakra,
     },
     {
-      name: "Styled-Components",
+      name: 'Styled-Components',
       image: StyledComponents,
     },
     {
-      name: "Node.Js",
+      name: 'Node.Js',
       image: nodejs,
     },
     {
-      name: "Google",
+      name: 'Google',
       image: google,
     },
     {
-      name: "MongoDB",
+      name: 'MongoDB',
       image: mongodb,
     },
     {
-      name: "Express",
+      name: 'Express',
       image: express,
     },
     {
-      name: "Passport",
+      name: 'Passport',
       image: passport,
     },
   ];
@@ -129,11 +129,11 @@ const About = () => {
             textAlign="center"
             mt="2rem"
           >
-            Made by{" "}
+            Made by{' '}
             <Link
-              href="https://github.com/epaez1996/ctp-hack"
+              href="https://github.com/epaez1996/Venture"
               target="_blank"
-              _hover={{ textDecoration: "none", color: "#00cba6" }}
+              _hover={{ textDecoration: 'none', color: '#00cba6' }}
             >
               Team Passione
             </Link>
@@ -150,7 +150,7 @@ const About = () => {
                     fontFamily="Archivo"
                     color="white"
                     fontSize="1rem"
-                    _hover={{ color: "#00cba6" }}
+                    _hover={{ color: '#00cba6' }}
                   >
                     {dev.name}
                   </Link>
