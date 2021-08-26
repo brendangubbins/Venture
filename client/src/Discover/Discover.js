@@ -1,11 +1,12 @@
-import React from "react";
-import { useState, useContext } from "react";
-import Sidebar from "../Sidebar/Sidebar";
-import styled from "styled-components";
-import { DiscoverEvents } from "./DiscoverEvents";
-import axios from "axios";
-import Context from "../Context";
-import Results from "../Results/Results";
+import React from 'react';
+import { useState, useContext, useEffect } from 'react';
+import Sidebar from '../Sidebar/Sidebar';
+import styled from 'styled-components';
+import { DiscoverEvents } from './DiscoverEvents';
+import axios from 'axios';
+import Context from '../Context';
+import Results from '../Results/Results';
+import { Skeleton } from '@chakra-ui/react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ const Category = styled.div`
 
 const CategoryName = styled.h3`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
 `;
 
 const CategoryImage = styled.img`
@@ -54,9 +55,10 @@ const CategoryImage = styled.img`
 
 const Heading = styled.h1`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   margin-top: 3rem;
   margin-bottom: 0;
+  font-size: 3rem;
 `;
 
 const unixStartDate = Math.round(new Date().getTime() / 1000);
@@ -69,14 +71,14 @@ const getLocation = () => {
 
 const categoryToResults = async (category) => {
   if (!navigator.geolocation) {
-    console.log("error; Geolocation API failed.");
+    console.log('error; Geolocation API failed.');
   }
 
   const position = await getLocation();
 
   const yelpAPIResults = await axios({
-    method: "post",
-    url: "http://localhost:5000/api/search",
+    method: 'post',
+    url: 'http://localhost:5000/api/search',
     data: {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
@@ -98,14 +100,24 @@ function Discover() {
 
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
-  console.log("userObject", userObject);
-  console.log("yelpEvents", yelpEvents);
-
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageCounter, setImageCounter] = useState(0);
   const handleEventClick = async (e, data) => {
     let res = await categoryToResults(data);
     console.log(res);
     setYelpEvents(res.events);
   };
+
+  const setImageLoad = () => {
+    setImageCounter(imageCounter + 1);
+  };
+
+  useEffect(() => {
+    if (imageCounter === 6) {
+      setImageLoaded(true);
+    }
+  }, [imageCounter]);
+
   if (yelpEvents.length === 0) {
     return (
       <>
@@ -118,10 +130,16 @@ function Discover() {
                 return (
                   <Category key={key}>
                     <CategoryName>{data.name}</CategoryName>
-                    <CategoryImage
-                      onClick={(e) => handleEventClick(e, data.type)}
-                      src={data.image}
-                    />
+                    <Skeleton
+                      fadeDuration={key === 1 ? 1.5 : 1}
+                      isLoaded={imageLoaded}
+                    >
+                      <CategoryImage
+                        onLoad={setImageLoad}
+                        onClick={(e) => handleEventClick(e, data.type)}
+                        src={data.image}
+                      />
+                    </Skeleton>
                   </Category>
                 );
               })}
@@ -131,10 +149,13 @@ function Discover() {
                 return (
                   <Category key={key}>
                     <CategoryName>{data.name}</CategoryName>
-                    <CategoryImage
-                      src={data.image}
-                      onClick={(e) => handleEventClick(e, data.type)}
-                    />
+                    <Skeleton fadeDuration={1} isLoaded={imageLoaded}>
+                      <CategoryImage
+                        onLoad={setImageLoad}
+                        src={data.image}
+                        onClick={(e) => handleEventClick(e, data.type)}
+                      />
+                    </Skeleton>
                   </Category>
                 );
               })}
