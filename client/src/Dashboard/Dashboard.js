@@ -1,12 +1,12 @@
-import React, { useEffect, useContext, useState } from 'react';
-import styled from 'styled-components';
-import Trending from './Trending';
-import Feed from './Feed';
-import Sidebar from '../Sidebar/Sidebar';
-import Context from '../Context';
-import axios from 'axios';
-import EventImage from '../Images/event.jpg';
-import eventService from '../services/events';
+import React, { useEffect, useContext, useState } from "react";
+import styled from "styled-components";
+import Trending from "./Trending";
+import Feed from "./Feed";
+import Sidebar from "../Sidebar/Sidebar";
+import Context from "../Context";
+import axios from "axios";
+import EventImage from "../Images/event.jpg";
+import eventService from "../services/events";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   height: 100vh;
   justify-content: space-between;
   overflow-y: hidden;
+  /* flex-direction: column; */
   // margin-left: 5rem;
   // margin-bottom: 2rem;
 `;
@@ -73,7 +74,7 @@ const TextWrapper = styled.div`
   background: rgba(0, 0, 0, 0.85);
   transition: 0.1s all ease-out;
   visibility: ${(props) => {
-    return props.visible ? 'visible' : 'hidden';
+    return props.visible ? "visible" : "hidden";
   }};
 `;
 
@@ -83,13 +84,14 @@ const EventText = styled.p`
 
 const Title = styled.h3`
   color: white;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   font-size: 3.5rem;
   // margin: 0 0 2rem 0;
 `;
 
 const Social = styled.div`
-  width: 25%;
+  width: 35%;
+  margin-top: 2.7rem;
   /* border: 1px solid red; */
   flex-direction: column;
 `;
@@ -103,7 +105,7 @@ const Dashboard = () => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     axios
-      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .get("http://localhost:5000/getUser", { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
         setUserEvents(response.data.upcomingEvents);

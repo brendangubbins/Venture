@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   text-align: center;
   justify-content: space-around;
   align-items: center;
+  margin-top: 5rem;
 `;
 
 const Title = styled.h4`
@@ -22,14 +23,13 @@ const Title = styled.h4`
 
 const TrendingWrapper = styled.div`
   width: 70%;
-  height: 350px;
   margin-bottom: 1rem;
 `;
 
 const Trending = () => {
   const trendingData = [
     {
-      name: "C7 Welcome Hackathon",
+      name: "C7 Hackathon",
       description:
         "Event participants will come together in a learning-first-minded event, to create tools that will help us transition back to pre-pandemic life. ",
       image: CTP,

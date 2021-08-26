@@ -8,14 +8,14 @@ import FeedAlert from "./FeedAlert";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
 const FeedWrapper = styled.div`
-  width: 70%;
+  width: 80%;
   height: 500px;
   margin-bottom: 1rem;
 `;
@@ -45,7 +45,7 @@ const feedData = [
   },
   {
     name: "Tyler",
-    status: "has tickets to The Lion King on Broadway! ",
+    status: "got tickets to The Lion King on Broadway ",
     image: Tyler,
   },
 ];

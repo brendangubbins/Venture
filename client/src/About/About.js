@@ -19,9 +19,30 @@ import express from "../Images/express.svg";
 import Chakra from "../Images/Chakra.png";
 import StyledComponents from "../Images/StyledComponents.png";
 import passport from "../Images/passport.png";
-import { normalizeEventKey } from "@chakra-ui/utils";
+
 //Renders the About page
 const About = () => {
+  //all devs for the project
+  let devs = [
+    {
+      name: "Abedin Kadir",
+      link: "https://github.com/auto-kad",
+    },
+    {
+      name: "Brendan Gubbins",
+      link: "https://github.com/brendangubbins",
+    },
+    {
+      name: "Edward Paez",
+      link: "https://github.com/epaez1996",
+    },
+    {
+      name: "Harjit Liyal",
+      link: "https://github.com/Slaeh",
+    },
+  ];
+
+  //All technologies used
   let icons = [
     {
       name: "JavaScript",
@@ -118,84 +139,48 @@ const About = () => {
             </Link>
           </Text>
           <Box>
-            <Center>
-              <Link
-                href="https://github.com/auto-kad"
-                target="_blank"
-                mt=".5rem"
-                fontFamily="Archivo"
-                color="white"
-                fontSize="1rem"
-                _hover={{ color: "#00cba6" }}
-              >
-                Abedin Kadir
-              </Link>
-            </Center>
-            <Center>
-              <Link
-                href="https://github.com/brendangubbins"
-                target="_blank"
-                mt=".5rem"
-                fontFamily="Archivo"
-                color="white"
-                fontSize="1rem"
-                _hover={{ color: "#00cba6" }}
-              >
-                Brendan Gubbins
-              </Link>
-            </Center>
-            <Center>
-              <Link
-                href="https://github.com/epaez1996"
-                target="_blank"
-                mt=".5rem"
-                fontFamily="Archivo"
-                fontSize="1rem"
-                color="white"
-                _hover={{ color: "#00cba6" }}
-              >
-                Edward Paez
-              </Link>
-            </Center>
-            <Center>
-              <Link
-                href="https://github.com/Slaeh"
-                target="_blank"
-                mt=".5rem"
-                fontFamily="Archivo"
-                fontSize="1rem"
-                color="white"
-                _hover={{ color: "#00cba6" }}
-              >
-                Harjit Liyal
-              </Link>
-            </Center>
+            {/* Everyone who worked on the project */}
+            {devs.map((dev, index) => {
+              return (
+                <Center key={index}>
+                  <Link
+                    href={dev.link}
+                    target="_blank"
+                    mt=".5rem"
+                    fontFamily="Archivo"
+                    color="white"
+                    fontSize="1rem"
+                    _hover={{ color: "#00cba6" }}
+                  >
+                    {dev.name}
+                  </Link>
+                </Center>
+              );
+            })}
           </Box>
         </Box>
       </Flex>
-
       <Box width="100%">
         <Center>
           <Flex mt="2rem">
-            {/* <SimpleGrid columns={[3]} spacing={1} mt="4rem" mb="3rem"> */}
+            {/* All technologies used in the project */}
             {icons.map((icon, index) => {
               return (
                 <motion.div whileHover={{ scale: 1.1 }} key={index}>
                   <Tooltip
                     hasArrow
                     label={icon.name}
-                    bg="gray.300"
+                    bg="white"
                     color="black"
-                    arrowSize={15}
+                    arrowSize={5}
                     gutter="20"
                   >
-                    <Image src={icon.image} boxSize="100px" m="2rem" />
+                    <Image src={icon.image} boxSize="70px" m="2rem" />
                   </Tooltip>
                 </motion.div>
               );
             })}
           </Flex>
-          {/* </SimpleGrid> */}
         </Center>
       </Box>
     </Flex>

@@ -9,12 +9,13 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  flex-direction: column;
+  /* flex-direction: column; */
 `;
 
 const Name = styled.h5`
+  width: 100%;
   font-family: "Archivo", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: white;
   text-align: left;
   margin: 0.5rem;
@@ -28,13 +29,16 @@ const Avatar = styled.img`
   margin: 0.5rem;
 `;
 
-const Description = styled.div`
+const Description = styled.p`
   font-family: "Archivo", sans-serif;
-  flex-direction: column;
   font-size: 12px;
   text-align: left;
   color: white;
   margin: 0.5rem;
+  width: 100%;
+  /* @media only screen and (max-width: 1470px) {
+    margin-bottom: 3rem;
+  } */
 `;
 
 const TrendingEvent = ({ data }) => {
