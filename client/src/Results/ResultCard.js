@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 // import styled from "styled-components";
-import { Text, Box, Image, Button, Badge } from "@chakra-ui/react";
+import { Text, Box, Image, Button } from "@chakra-ui/react";
 import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
 import Adventure from "../Images/Adventure.png";
-import { format, fromUnixTime, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import axios from "axios";
 import Context from "../Context";
 import eventService from "../services/events";
@@ -37,8 +37,7 @@ const ResultCard = ({ event }) => {
   timeString.push(part);
   let time = timeString.join(":");
 
-  const { userObject, setUserObject, yelpEvents, setYelpEvents } =
-    useContext(Context);
+  const { userObject, setUserObject } = useContext(Context);
 
   useEffect(() => {
     axios
@@ -66,7 +65,10 @@ const ResultCard = ({ event }) => {
     eventService
       .create(newEvent)
       .then((returnedEvent) => console.log("Returned event: ", returnedEvent));
+    setIsVisible(false);
   };
+
+  const [isVisble, setIsVisible] = useState(true);
 
   return (
     <Box
@@ -132,16 +134,21 @@ const ResultCard = ({ event }) => {
             Learn more
           </a>
         </Text>
-        <Text mt=".3rem">
-          <AddIcon color="white" mr=".5rem" />
-          <Button
-            onClick={saveEvent}
-            bgColor="#00cba6"
-            _hover={{ bgColor: "#00b795" }}
-          >
-            Add
-          </Button>
-        </Text>
+        {/* if the user clicks on the button, add it to user events and remove the button */}
+        {isVisble == true ? (
+          <Text mt=".3rem">
+            <AddIcon color="white" mr=".5rem" />
+            <Button
+              onClick={saveEvent}
+              bgColor="#00cba6"
+              _hover={{ bgColor: "#00b795" }}
+            >
+              Add
+            </Button>
+          </Text>
+        ) : (
+          ""
+        )}
       </Box>
     </Box>
   );
