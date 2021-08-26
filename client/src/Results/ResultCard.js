@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-// import styled from "styled-components";
 import { Text, Box, Image, Button } from "@chakra-ui/react";
 import { CalendarIcon, AtSignIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
 import Adventure from "../Images/Adventure.png";
@@ -12,9 +11,6 @@ import { useToast } from "@chakra-ui/react";
 //renders a card that displays events from api response
 const ResultCard = ({ event }) => {
   const toast = useToast();
-  //console.log("Properties: ", Object.getOwnPropertyNames(event));
-  //console.log("Event page event", event);
-
   //Address
   let address = event.location.display_address.join(" ");
   //parse the date to a more readable format
@@ -24,7 +20,6 @@ const ResultCard = ({ event }) => {
   let parsedISODate = parseISO(event.time_start); //parse incoming ISO 8601 date and turn into Date object
 
   let ISODate = format(parsedISODate, "yyyy-M-dd h:mm aaaaa'm'"); //format Date object
-  //console.log("example here: ", ISODate);
 
   //parse the time to a more readable format
   let timeString = event.time_start.substring(12, 19).split(":");
@@ -37,7 +32,6 @@ const ResultCard = ({ event }) => {
   }
   timeString[0] = parseInt(timeString % 12).toString();
   timeString.push(part);
-  // let time = timeString.join(":");
 
   const { userObject, setUserObject } = useContext(Context);
 

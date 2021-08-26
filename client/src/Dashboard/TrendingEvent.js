@@ -8,9 +8,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Content = styled.div`
-  /* flex-direction: column; */
-`;
+const Content = styled.div``;
 
 const Name = styled.h5`
   width: 100%;
@@ -36,11 +34,9 @@ const Description = styled.p`
   color: white;
   margin: 0.5rem;
   width: 100%;
-  /* @media only screen and (max-width: 1470px) {
-    margin-bottom: 3rem;
-  } */
 `;
 
+//returns the trending data
 const TrendingEvent = ({ data }) => {
   return (
     <Wrapper>

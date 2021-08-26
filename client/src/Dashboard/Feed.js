@@ -32,6 +32,7 @@ const Content = styled.div`
   width: 100%;
 `;
 
+//Feed data
 const feedData = [
   {
     name: "Angie",
@@ -49,6 +50,8 @@ const feedData = [
     image: Tyler,
   },
 ];
+
+//returns the feed for dashboard
 const Feed = () => {
   return (
     <Wrapper>
