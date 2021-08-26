@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import { SidebarData } from "./SidebarData";
-import { Link } from "react-router-dom";
-import CTP from "../Images/CTP.png";
-import Context from "../Context";
-import axios from "axios";
+import React, { useContext, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { SidebarData } from './SidebarData';
+import { Link } from 'react-router-dom';
+import CTP from '../Images/CTP.png';
+import Context from '../Context';
+import axios from 'axios';
+import Venture from '../Images/venture.png';
 
 const Wrapper = styled.div`
   background: #071221;
   height: 100%;
   width: 307px;
-  // display: inline-block;
   position: fixed;
   top: 6.3rem;
 `;
@@ -48,7 +48,7 @@ const ImageSkeleton = keyframes`
 
 const Username = styled.h2`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   text-align: left;
   margin-top: 0;
   font-size: 1.125rem;
@@ -63,13 +63,6 @@ const SkeletonText = styled.div`
   animation: ${ImageSkeleton} 1s linear infinite alternate;
 `;
 
-const UserBio = styled.p`
-  color: white;
-  margin: 0 0 1rem 0;
-  font-family: "Archivo", sans-serif;
-  font-size: 0.6666rem;
-`;
-
 const EventInformation = styled.div`
   display: flex;
   align-items: center;
@@ -79,11 +72,10 @@ const EventInformation = styled.div`
 `;
 const EventInfoHeader = styled.h2`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   text-align: center;
   font-size: 1.125rem;
   margin: 0.3rem 0;
-  // width: 88%;
 `;
 
 const ImgSkele = styled.div`
@@ -103,11 +95,9 @@ const EventImage = styled.img`
 
 const EventName = styled.p`
   color: white;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 0.75rem;
 `;
-
-// const EventLocation = styled.p``;
 
 const NameLocationContainer = styled.div`
   display: flex;
@@ -118,7 +108,7 @@ const NameLocationContainer = styled.div`
 const MenuHeader = styled.p`
   color: #00cba6;
   font-size: 1.2rem;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   margin-left: 1rem;
   margin-top: 1rem;
 `;
@@ -133,10 +123,10 @@ const MenuList = styled.ul`
 
 const MenuListItem = styled.li`
   list-style-type: none;
-  font-family: "Archivo", sans-serif;
+  font-family: 'Archivo', sans-serif;
   display: flex;
-  color: ${(props) => (props.active ? "#00CBA6" : "white")};
-  border-left: ${(props) => (props.active ? "3px solid #00CBA6" : "none")};
+  color: ${(props) => (props.active ? '#00CBA6' : 'white')};
+  border-left: ${(props) => (props.active ? '3px solid #00CBA6' : 'none')};
   padding-left: 0.5rem;
   font-size: 1rem;
   &:hover {
@@ -145,26 +135,37 @@ const MenuListItem = styled.li`
   align-items: center;
 `;
 
+// const LogoContainer = styled.div`
+//   display: flex;
+//   height: 100%;
+//   align-items: flex-end;
+// `;
+
+const LogoImage = styled.img`
+  margin: 0 auto;
+  margin-top: 22rem;
+`;
+
 const Sidebar = () => {
   const { userObject, setUserObject, yelpEvents, setYelpEvents } =
     useContext(Context);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getUser", { withCredentials: true })
+      .get('http://localhost:5000/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
-        console.log("userObject retrieved in Sidebar", userObject);
+        console.log('userObject retrieved in Sidebar', userObject);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:5000/auth/logout", { withCredentials: true })
+      .get('http://localhost:5000/auth/logout', { withCredentials: true })
       .then((response) => {
         console.log(response);
-        window.open("http://localhost:3000", "_self");
+        window.open('http://localhost:3000', '_self');
       })
       .catch((error) => {
         console.log(error);
@@ -201,22 +202,19 @@ const Sidebar = () => {
             <MenuListItem
               key={key}
               active={window.location.pathname === data.path}
-              // onClick={() => {
-              //   window.location.pathname = data.path;
-              // }}
             >
-              <div style={{ marginRight: "1rem" }}>{data.icon}</div>
+              <div style={{ marginRight: '1rem' }}>{data.icon}</div>
               <Link
                 onClick={() => {
-                  if (data.title === "Logout") {
+                  if (data.title === 'Logout') {
                     setUserObject(null);
                     handleLogout();
-                  } else if (data.title !== "Discover") {
+                  } else if (data.title !== 'Discover') {
                     setYelpEvents([]);
                   }
                 }}
-                to={data.path === "Logout" ? "/" : data.path}
-                style={{ textDecoration: "None", color: "inherit" }}
+                to={data.path === 'Logout' ? '/' : data.path}
+                style={{ textDecoration: 'None', color: 'inherit' }}
               >
                 {data.title}
               </Link>
@@ -224,6 +222,8 @@ const Sidebar = () => {
           );
         })}
       </MenuList>
+
+      <LogoImage src={Venture} />
     </Wrapper>
   );
 };
