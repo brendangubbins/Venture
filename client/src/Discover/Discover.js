@@ -78,7 +78,7 @@ const categoryToResults = async (category) => {
 
   const yelpAPIResults = await axios({
     method: 'post',
-    url: 'http://localhost:5000/api/search',
+    url: 'https://www.venture-ctp.herokuapp.com/api/search',
     data: {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,

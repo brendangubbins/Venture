@@ -88,13 +88,13 @@ const Landing = () => {
 
   const handleGoogleLogin = () => {
     axios
-      .get("http://localhost:5000/getUser", { withCredentials: true })
+      .get("https://www.venture-ctp.herokuapp.com/getUser", { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setUserObject(response.data);
-          window.open("http://localhost:3000/Dashboard", "_self");
+          window.open("https://www.venture-ctp.herokuapp.com/Dashboard", "_self");
         } else {
-          window.open("http://localhost:5000/auth/google", "_self");
+          window.open("https://www.venture-ctp.herokuapp.com/auth/google", "_self");
         }
       })
       .catch((error) => {

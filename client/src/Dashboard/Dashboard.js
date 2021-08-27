@@ -88,7 +88,7 @@ const Dashboard = () => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     axios
-      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .get('https://www.venture-ctp.herokuapp.com/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
         setUserEvents(response.data.upcomingEvents);

@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.98474f58.chunk.css",
+    "main.js": "/static/js/main.a7642acd.chunk.js",
+    "main.js.map": "/static/js/main.a7642acd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ba789bb1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ba789bb1.js.map",
+    "static/js/2.82d84b0e.chunk.js": "/static/js/2.82d84b0e.chunk.js",
+    "static/js/2.82d84b0e.chunk.js.map": "/static/js/2.82d84b0e.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.98474f58.chunk.css.map": "/static/css/main.98474f58.chunk.css.map",
+    "static/js/2.82d84b0e.chunk.js.LICENSE.txt": "/static/js/2.82d84b0e.chunk.js.LICENSE.txt",
+    "static/media/Adventure.cdc30b45.png": "/static/media/Adventure.cdc30b45.png",
+    "static/media/Angie.f87bad3d.JPG": "/static/media/Angie.f87bad3d.JPG",
+    "static/media/CTP.e486347c.png": "/static/media/CTP.e486347c.png",
+    "static/media/Chakra.78a35cdc.png": "/static/media/Chakra.78a35cdc.png",
+    "static/media/Charles.17b1093b.jpg": "/static/media/Charles.17b1093b.jpg",
+    "static/media/StyledComponents.e35c7793.png": "/static/media/StyledComponents.e35c7793.png",
+    "static/media/Tyler.0b5e0dca.jpg": "/static/media/Tyler.0b5e0dca.jpg",
+    "static/media/art.b7e205c7.jpg": "/static/media/art.b7e205c7.jpg",
+    "static/media/celebratingTogether.a67e3ba5.png": "/static/media/celebratingTogether.a67e3ba5.png",
+    "static/media/express.85a49c64.svg": "/static/media/express.85a49c64.svg",
+    "static/media/festival.46184feb.jpg": "/static/media/festival.46184feb.jpg",
+    "static/media/food.b011144e.jpg": "/static/media/food.b011144e.jpg",
+    "static/media/google.80f0af23.svg": "/static/media/google.80f0af23.svg",
+    "static/media/javascript.4c1b5332.svg": "/static/media/javascript.4c1b5332.svg",
+    "static/media/mlb.28518e43.png": "/static/media/mlb.28518e43.png",
+    "static/media/mongodb.37c25489.svg": "/static/media/mongodb.37c25489.svg",
+    "static/media/music.5a766b08.jpg": "/static/media/music.5a766b08.jpg",
+    "static/media/nightlife.4390c4e8.jpg": "/static/media/nightlife.4390c4e8.jpg",
+    "static/media/nodejs.8629b14e.svg": "/static/media/nodejs.8629b14e.svg",
+    "static/media/react.4e0c9700.svg": "/static/media/react.4e0c9700.svg",
+    "static/media/sport.52353deb.jpg": "/static/media/sport.52353deb.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ba789bb1.js",
+    "static/js/2.82d84b0e.chunk.js",
+    "static/css/main.98474f58.chunk.css",
+    "static/js/main.a7642acd.chunk.js"
+  ]
+}

@@ -145,7 +145,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/getUser', { withCredentials: true })
+      .get('https://www.venture-ctp.herokuapp.com/getUser', { withCredentials: true })
       .then((response) => {
         setUserObject(response.data);
         console.log('userObject retrieved in Sidebar', userObject);
@@ -155,10 +155,10 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     axios
-      .get('http://localhost:5000/auth/logout', { withCredentials: true })
+      .get('https://www.venture-ctp.herokuapp.com/auth/logout', { withCredentials: true })
       .then((response) => {
         console.log(response);
-        window.open('http://localhost:3000', '_self');
+        window.open('https://www.venture-ctp.herokuapp.com', '_self');
       })
       .catch((error) => {
         console.log(error);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:5000/api/events';
+const baseUrl = 'https://www.venture-ctp.herokuapp.com/api/events';
 
 const getAll = () => {
   const request = axios.get(baseUrl);
