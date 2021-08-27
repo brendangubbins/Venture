@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+## Inspiration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+As places begin to open up, there are more opportunities for us to leave virtual events behind, and once more begin doing the things we love. Venture is designed to help people return to normal by searching for in-person events in their area.
 
-## Available Scripts
+## How to run
 
-In the project directory, you can run:
+The application requires .env keys MONGODB, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, KEY, YELP_KEY in the `server` directory
 
-### `npm start`
+A MongoDB URI can be accessed via [MongoDB Atlas](https://www.mongodb.com/).
+Google Client ID, Google Client Secret, and redirect uris are set up on [Google Cloud Platform](https://console.cloud.google.com/apis/dashboard).
+KEY can set to anything.
+YELP_KEY can be be acquired from [Yelp Fusion](https://www.yelp.com/developers/documentation/v3/event).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Run `npm i` then `npm start` in both `client` and `server` directories
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## What it does
 
-### `npm test`
+Venture allows users to search for nearby concerts, festivals, performing arts, and much more. After a user chooses what type of event they want to attend, they're presented with events that relate to the category. After selection, Venture also saves each user's events to their dashboard, where they can see what events are upcoming and trending.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Demo
 
-### `npm run build`
+[Youtube Demo](https://youtu.be/W6bsu0xSuIQ)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Login](https://media.giphy.com/media/pWJtnoGgwJ2dkKLjWO/giphy.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Categories](https://media.giphy.com/media/zmlaFEm6T3HJ6PdiSg/giphy.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Choose Events](https://media.giphy.com/media/ER39yHkskav2tQyeHu/giphy.gif)
 
-### `npm run eject`
+![Dashboard](https://media.giphy.com/media/hhsoJoJlHnAkUT9lSu/giphy.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## How we built it
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The front-end was built by Edward and Harjit using the **React** JavaScript framework, **Styled-Components**, and **Chakra-UI**.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The back-end was built by Abedin and Brendan with **Node.js**, **Passport** for **Google OAuth**, and **MongoDB Atlas**.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Challenges
 
-## Learn More
+**Front-end** - Creating a general layout was challenging because the user's experience is one of the most important things to consider when making a web application. One of the challenges we faced was creating a sidebar for user navigation. It took a while for us to make it both aestheically pleasing and functional within the application.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Back-end** -  When we thought of Venture, we did not know which API to use for searching events. It was difficult to find event-related APIs that gave good responses, since we needed descriptions, images, times, and locations of each event. We ended up using Yelp's Event API because it gave the responses we were looking for. In the future we'd like to try Google's API for finding local attractions to make custom events for.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Accomplishments that we're proud of
 
-### Code Splitting
+We're proud that we were able to put our design into code and having the intended functionality within the time frame. Everyone on the team contributed and communicated well with each other to make sure the programming went smoothly and all issues were resolved quickly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## What we learned
+In creating Venture, we learned about communication between roles and team members. The application required a lot of back-and-forth between front-end and back-end developers because we needed to retrieve, display, and post data.  
 
-### Analyzing the Bundle Size
+There were many components in Venture that relied on getting data from the server or other components. Venture also taught us how to work as a team because there were many times we had to come together to fix bugs and figure out how the application should work in specific scenarios.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## What's next for Venture?
+* Create a friends list 
+* Allow users to create their own events, which they can send invitations to their friends
+* Functional/dynamic trending and feed on dashboard
