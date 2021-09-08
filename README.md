@@ -1,3 +1,9 @@
+## CTP Cohort 7 Welcome Hackathon 2021 Submission
+
+This project was submitted to [CTP Cohort 7 Welcome Hackathon 2021](https://devpost.com/software/venture-4pmz9x). 
+
+Categories won: Best Overall, Best Backend, Best SWE Practices. 
+
 ## Inspiration
 
 As places begin to open up, there are more opportunities for us to leave virtual events behind, and once more begin doing the things we love. Venture is designed to help people return to normal by searching for in-person events in their area.
